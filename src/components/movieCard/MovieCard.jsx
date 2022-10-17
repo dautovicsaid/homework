@@ -1,32 +1,39 @@
 import React from 'react';
+import {Row, Col, Space} from "antd";
+import classes from './MovieCard.module.scss';
 
-const MovieCard = ({name, year, genre, actors,image}) => {
+
+const MovieCard = ({name, year, genre, actors, image}) => {
     return (
-        <div className="col-6 offset-3 mb-5">
-            <div className="card">
-                <img src={image}
-                     style={{height : '400px',objectFit: "fill" }}
-                     className="card-img-top" alt="..." />
-                <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
-                    <div className="row">
-                        <div className="col-4 offset-2">
-                            <p className="card-text">{genre}</p>
-                        </div>
-                        <div className="col-4">
-                            <p className="card-text">{year}</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-8 offset-2">
-                        <p className="card-text">
-                            {actors.join(", ")}
-                        </p>
-                    </div>
+        <Col span={16} offset={4}>
+            <div className={classes["card"]}>
+                <img src={image} alt={image}/>
+                <div className={classes["card-content"]}>
+                    <Space direction="vertical" size="large" style={{display: 'flex', alignItems: 'center'}}>
+                        <Row>
+                            <Col>
+                                <h2> {name}</h2>
+                            </Col>
+                        </Row>
+                        <Row gutter={50}>
+                            <Col>
+                                <span>{year}</span>
+                            </Col>
+                            <Col>
+                                <span>{genre}</span>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <p>
+                                    {actors.join(', ')}
+                                </p>
+                            </Col>
+                        </Row>
+                    </Space>
                 </div>
             </div>
-        </div>
+        </Col>
     )
 }
 

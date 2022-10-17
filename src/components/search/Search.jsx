@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import useDebounce from "../../hooks/useDebounce";
+import {Input} from 'antd';
+import './Search.scss';
 
-const Search = ({onSearch}) => {
+const {Search} = Input;
+
+
+const SearchField = ({onSearch}) => {
     const [query, setQuery] = useState('');
     const debouncedQuery = useDebounce(query, 500);
 
@@ -13,12 +18,11 @@ const Search = ({onSearch}) => {
         }
     }, [debouncedQuery, onSearch])
 
-    return <div className="form-group">
-        <label className="float-start">Search:</label>
-        <input className="form-control" type="text" onChange={(e) => setQuery(e.target.value)}/>
-    </div>
+    return <Search placeholder="input search text"
+                   onChange={(e) => setQuery(e.target.value)} allowClear/>
+
 }
 
-export default Search;
+export default SearchField;
 
 

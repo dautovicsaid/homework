@@ -1,30 +1,43 @@
 import React, {useEffect, useState} from 'react';
 import MovieCard from "../movieCard/MovieCard";
-import Table from "../table/Table";
+import TableWrapper from "../table/Table";
+import Modal from "antd/es/modal/Modal";
+import {useAppData} from "../../context/AppContext";
+import {Button} from 'antd';
 import Search from "../search/Search";
 
 const SelectedMovie = ({movie}) => {
     const [filteredUsers, setFilteredUsers] = useState([]);
+    const [showUserTable, setShowUserTable] = useState(false);
+    const {setIsModalOpen, isModalOpen} = useAppData()
+
+    const handleCancel = () => {
+        setIsModalOpen();
+        setShowUserTable(false)
+    };
 
     const userTableHeaders = [
         {
             title: 'Image',
-            property: 'image',
-            isImage: true
+            dataIndex: 'image',
+            render: (text, record) => {
+                return <img src={record.image}
+                            style={{width: '50px', aspectRatio: 1, borderRadius: '50%'}}
+                            alt={record.image}/>
+            }
         }, {
             title: 'First Name',
-            property: 'firstName'
+            dataIndex: 'firstName'
         }, {
             title: 'Surname',
-            property: 'lastName'
+            dataIndex: 'lastName'
         }, {
             title: 'Age',
-            property: 'age'
+            dataIndex: 'age'
         }, {
             title: 'City',
-            property: 'city'
+            dataIndex: 'city'
         }];
-
     useEffect(() => {
         setFilteredUsers(movie.usersWatched);
     }, [movie]);
@@ -37,15 +50,28 @@ const SelectedMovie = ({movie}) => {
     }
 
     return <>
-        <MovieCard name={movie.name}
-                   year={movie.year}
-                   genre={movie.genre}
-                   image={movie.image}
-                   actors={movie.actors}/>
-        <Search onSearch={searchUsers}/>
-        <Table headers={userTableHeaders}
-               rows={filteredUsers}
-        />
+        <Modal title="Basic Modal"
+               open={isModalOpen}
+               onCancel={handleCancel}
+               footer={
+                   <Button type="primary"
+                           onClick={() => setShowUserTable(!showUserTable)}>Prikaži korisnike</Button>
+               }
+               width={'50vw'}>
+            <MovieCard name={movie.name}
+                       year={movie.year}
+                       genre={movie.genre}
+                       image={movie.image}
+                       actors={movie.actors}/>
+            {showUserTable &&
+            <>
+                <Search onSearch={searchUsers}/>
+                <TableWrapper headers={userTableHeaders}
+                              rows={filteredUsers}
+                />
+            </>
+            }
+        </Modal>
     </>;
 }
 

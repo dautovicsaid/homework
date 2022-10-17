@@ -3,6 +3,7 @@ import AppProvider from "./context/AppContext";
 import 'bootstrap/dist/css/bootstrap.css';
 import MoviesTable from "./components/moviesTable/MoviesTable";
 import React from "react";
+import { Col, Row } from 'antd';
 import SelectedMovieWrapper from "./components/selectedMovie/SelectedMovieWrapper";
 
 
@@ -10,14 +11,14 @@ function App() {
     return (
         <div className="App">
             <AppProvider>
-                <div className="row mt-5">
-                    <div className="col-8 offset-2">
-                        <div className="row">
+                <Row style={{padding: '50px 0'}}>
+                    <Col span={18} offset={4}>
+                        <Row>
                             <MoviesTable/>
                             <SelectedMovieWrapper/>
-                        </div>
-                    </div>
-                </div>
+                        </Row>
+                    </Col>
+                </Row>
             </AppProvider>
         </div>
     );

@@ -1,26 +1,57 @@
 import React, {useState} from 'react';
 import {moviesList} from "../../constants/constants";
-import Table from "../table/Table";
-import Search from "../search/Search";
+import SearchField from "../search/Search";
 import {useAppData} from "../../context/AppContext";
+import {Col, Space} from "antd";
+import TableWrapper from "../table/Table";
 
 const MoviesTable = () => {
     const headers = [
         {
             title: "Id",
-            property: "id"
+            dataIndex: "id",
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.id - b.id,
         },
         {
             title: "Name",
-            property: "name"
+            dataIndex: "name"
         },
         {
             title: "Year",
-            property: "year"
+            dataIndex: "year",
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.year - b.year,
         },
         {
             title: "Genre",
-            property: "genre"
+            dataIndex: "genre",
+            filters: [
+                {
+                    text: 'Crime',
+                    value: 'Crime',
+                },
+                {
+                    text: 'Drama',
+                    value: 'Drama',
+                },
+                {
+                    text: 'Action',
+                    value: 'Action',
+                },
+                {
+                    text: 'Biography',
+                    value: 'Biography'
+                },
+                {
+                    text: 'Horror',
+                    value: 'Horror',
+                },
+                {
+                    text: 'Mystery',
+                    value: 'Mystery',
+                }],
+            onFilter: (value, record) => record.genre.indexOf(value) === 0
         },
     ];
     const {setSelectedMovie} = useAppData()
@@ -31,14 +62,16 @@ const MoviesTable = () => {
             movie.name.toLowerCase().includes(searchTerm.toLowerCase())));
     }
 
-    return <div className="col-6">
-        <Search onSearch={searchMovies}/>
-        <Table
-            headers={headers}
-            rows={filteredMovies}
-            onRowClick={(e) => setSelectedMovie(e)}
-        />
-    </div>
+    return <Col span={24}>
+        <Space direction="vertical" size="large" style={{display: 'flex'}}>
+            <SearchField onSearch={searchMovies}/>
+            <TableWrapper
+                headers={headers}
+                rows={filteredMovies}
+                onRowClick={(e) => setSelectedMovie(e)}
+            />
+        </Space>
+    </Col>
 
 }
 

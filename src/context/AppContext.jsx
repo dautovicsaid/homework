@@ -4,7 +4,8 @@ import {usersList} from "../constants/constants";
 const AppContext = createContext();
 
 const AppProvider = ({children}) => {
-    const [selectedMovie, setSelectedMovie] = useState(null)
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onMovieSelect = (movieData) => {
         const usersWatched = usersList.filter(user => user.movies.includes(movieData.id))
@@ -13,14 +14,22 @@ const AppProvider = ({children}) => {
             ...movieData,
             usersWatched: usersWatched
         })
+        setIsModalOpen(true);
     }
+
+    const onModalClose = () => {
+        setIsModalOpen(false);
+    }
+
 
     useEffect(() => {
     }, [selectedMovie])
 
     const data = {
         selectedMovie: selectedMovie,
-        setSelectedMovie: (e) => onMovieSelect(e)
+        setSelectedMovie: (e) => onMovieSelect(e),
+        isModalOpen : isModalOpen,
+        setIsModalOpen : () => onModalClose()
     }
 
     return <AppContext.Provider value={data}>

@@ -1,5 +1,6 @@
 export const usersList = [
     {
+        key: 1,
         id: 1,
         firstName: 'Edina',
         lastName: 'Mehmedovic',
@@ -9,6 +10,7 @@ export const usersList = [
         movies: [3, 2, 4, 5]
     },
     {
+        key: 2,
         id: 2,
         firstName: 'Ana',
         lastName: 'Markovic',
@@ -18,6 +20,7 @@ export const usersList = [
         movies: [1, 6, 12, 2]
     },
     {
+        key: 3,
         id: 3,
         firstName: 'Marko',
         lastName: 'Markovic',
@@ -27,6 +30,7 @@ export const usersList = [
         movies: [18, 11, 3]
     },
     {
+        key: 4,
         id: 4,
         firstName: 'Nemanja',
         lastName: 'Nemanjic',
@@ -39,6 +43,7 @@ export const usersList = [
 
 export const moviesList = [
     {
+        key: 1,
         id: 1,
         name: 'Pulp Fiction',
         year: 1994,
@@ -47,6 +52,7 @@ export const moviesList = [
         actors: ['John Travolta', 'Uma Thurman', 'Samuel L. Jackson'],
     },
     {
+        key: 2,
         id: 2,
         name: 'About Time',
         year: 2013,
@@ -55,6 +61,7 @@ export const moviesList = [
         actors: ['John Travolta', 'Uma Thurman', 'Samuel L. Jackson'],
     },
     {
+        key: 3,
         id: 3,
         name: 'The Shawshank Redemption',
         year: 1994,
@@ -63,6 +70,7 @@ export const moviesList = [
         actors: ['Tim Robbins', 'Morgan Freeman'],
     },
     {
+        key: 4,
         id: 4,
         name: 'Fight Club',
         year: 1999,
@@ -71,6 +79,7 @@ export const moviesList = [
         actors: ['Brad Pitt', 'Edward Norton'],
     },
     {
+        key: 5,
         id: 5,
         name: 'Inception',
         year: 2010,
@@ -83,6 +92,7 @@ export const moviesList = [
         ],
     },
     {
+        key: 6,
         id: 6,
         name: `One Flew Over the Cuckoo's Nest`,
         year: 1975,
@@ -91,6 +101,7 @@ export const moviesList = [
         actors: ['Jack Nicholson', 'Louise Fletcher'],
     },
     {
+        key: 7,
         id: 7,
         name: 'The Silence of the Lambs',
         year: 1991,
@@ -99,6 +110,7 @@ export const moviesList = [
         actors: ['Jodie Foster', 'Anthony Hopkins'],
     },
     {
+        key: 8,
         id: 8,
         name: 'Sinister',
         year: 2012,
@@ -107,6 +119,7 @@ export const moviesList = [
         actors: ['Ethan Hawke', 'Juliet Rylance'],
     },
     {
+        key: 9,
         id: 9,
         name: 'Insidious',
         year: 2010,
@@ -115,6 +128,7 @@ export const moviesList = [
         actors: ['Patrick Wilson', 'Rose Byrne', 'Lin Shaye'],
     },
     {
+        key: 10,
         id: 10,
         name: 'Untouchable',
         year: 2011,
@@ -123,6 +137,7 @@ export const moviesList = [
         actors: ['Francois Cluzet', 'Omar Sy'],
     },
     {
+        key: 11,
         id: 11,
         name: 'The Dark Knight Rises',
         year: 2012,
@@ -131,6 +146,7 @@ export const moviesList = [
         actors: ['Christian Bale', 'Tom Hardy'],
     },
     {
+        key: 12,
         id: 12,
         name: 'Avengers: Endgame',
         year: 2019,
@@ -139,6 +155,7 @@ export const moviesList = [
         actors: ['Robert Downey Jr', 'Chris Evans', 'Mark Ruffalo'],
     },
     {
+        key: 13,
         id: 13,
         name: 'Good Will Hunting',
         year: 1997,
@@ -147,6 +164,7 @@ export const moviesList = [
         actors: ['Robin Williams', 'Matt Damon', 'Ben Affleck'],
     },
     {
+        key: 14,
         id: 14,
         name: 'The Hunt',
         year: 2012,
@@ -155,6 +173,7 @@ export const moviesList = [
         actors: ['Mads Mikkelsen', 'Thomas Bo Larsen'],
     },
     {
+        key: 15,
         id: 15,
         name: 'Amelie',
         year: 2001,
@@ -163,6 +182,7 @@ export const moviesList = [
         actors: ['Audrey Tautou', 'Mathieu Kassovitz'],
     },
     {
+        key: 16,
         id: 16,
         name: 'Shutter Island',
         year: 2010,
@@ -171,6 +191,7 @@ export const moviesList = [
         actors: ['Leonardo DiCaprio', 'Mark Ruffalo'],
     },
     {
+        key: 17,
         id: 17,
         name: 'Joker',
         year: 2019,
@@ -179,6 +200,7 @@ export const moviesList = [
         actors: ['Joaquin Phoenix', 'Robert De Niro'],
     },
     {
+        key: 18,
         id: 18,
         name: 'The Departed',
         year: 2006,

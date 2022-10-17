@@ -1,15 +1,16 @@
 import React from 'react';
 import {useAppData} from "../../context/AppContext";
 import SelectedMovie from "./SelectedMovie";
+import {Col} from "antd";
 
 const SelectedMovieWrapper = () => {
     const {selectedMovie} = useAppData();
 
-    return <div className="col-6">
-        {selectedMovie ?
-            <SelectedMovie movie={selectedMovie}/> : <p>No movie selected!</p>
+    return <Col span={10} offset={2}>
+        {selectedMovie &&
+        <SelectedMovie movie={selectedMovie}/>
         }
-    </div>
+    </Col>
 }
 
 export default SelectedMovieWrapper;
