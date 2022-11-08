@@ -1,20 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import MovieCard from "../movieCard/MovieCard";
 import TableWrapper from "../table/Table";
-import Modal from "antd/es/modal/Modal";
-import {useAppData} from "../../context/AppContext";
-import {Button} from 'antd';
+import { Col, Row} from 'antd';
 import Search from "../search/Search";
+import {moviesList, usersList} from "../../constants/constants";
+import {useNavigate, useParams} from "react-router-dom";
 
-const SelectedMovie = ({movie}) => {
+const SelectedMovie = () => {
+    const [usersWatched, setUsersWatched] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
-    const [showUserTable, setShowUserTable] = useState(false);
-    const {setIsModalOpen, isModalOpen} = useAppData()
+    const [data, setData] = useState(null);
+    let {id} = useParams();
+    const navigate = useNavigate();
 
-    const handleCancel = () => {
-        setIsModalOpen();
-        setShowUserTable(false)
-    };
+    useEffect(() => {
+        const movie = moviesList.find(movie => movie.id === parseInt(id, 10));
+        const users = usersList.filter(user => user.movies.includes(movie.id))
+        setData(movie)
+        setUsersWatched(users)
+    }, [id]);
 
     const userTableHeaders = [
         {
@@ -38,43 +42,37 @@ const SelectedMovie = ({movie}) => {
             title: 'City',
             dataIndex: 'city'
         }];
-    useEffect(() => {
-        setFilteredUsers(movie.usersWatched);
-    }, [movie]);
 
     const searchUsers = (searchTerm) => {
         const lowercaseSearchTerm = searchTerm.toLowerCase();
-        setFilteredUsers(movie.usersWatched.filter(user =>
+        setFilteredUsers(usersWatched.filter(user =>
             user.firstName.toLowerCase().includes(lowercaseSearchTerm)
             || user.lastName.toLowerCase().includes(lowercaseSearchTerm)));
     }
 
     return <>
-        <Modal title="Basic Modal"
-               open={isModalOpen}
-               onCancel={handleCancel}
-               footer={
-                   <Button type="primary"
-                           onClick={() => setShowUserTable(!showUserTable)}>Prikaži korisnike</Button>
-               }
-               width={'50vw'}>
-            <MovieCard name={movie.name}
-                       year={movie.year}
-                       genre={movie.genre}
-                       image={movie.image}
-                       actors={movie.actors}/>
-            {showUserTable &&
-            <>
+        <Row>
+            <Col span={4} offset={2}>
+                {data && <MovieCard
+                    name={data.name}
+                    year={data.year}
+                    genre={data.genre}
+                    image={data.image}
+                    actors={data.actors}/>
+                }
+            </Col>
+            <Col span={16}>
                 <Search onSearch={searchUsers}/>
                 <TableWrapper headers={userTableHeaders}
                               rows={filteredUsers}
+                              onRowClick={(row) => {
+                                  navigate(`/users/${row.key}`)
+                              }}
                 />
-            </>
-            }
-        </Modal>
+            </Col>
+        </Row>
     </>;
 }
-
 
 export default SelectedMovie;
 

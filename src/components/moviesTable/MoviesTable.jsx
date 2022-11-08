@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {moviesList} from "../../constants/constants";
 import SearchField from "../search/Search";
-import {useAppData} from "../../context/AppContext";
 import {Col, Space} from "antd";
 import TableWrapper from "../table/Table";
+import {useNavigate} from "react-router-dom";
 
 const MoviesTable = () => {
+    const navigate = useNavigate();
     const headers = [
         {
             title: "Id",
@@ -54,7 +55,6 @@ const MoviesTable = () => {
             onFilter: (value, record) => record.genre.indexOf(value) === 0
         },
     ];
-    const {setSelectedMovie} = useAppData()
     const [filteredMovies, setFilteredMovies] = useState(moviesList);
 
     const searchMovies = (searchTerm) => {
@@ -68,7 +68,7 @@ const MoviesTable = () => {
             <TableWrapper
                 headers={headers}
                 rows={filteredMovies}
-                onRowClick={(e) => setSelectedMovie(e)}
+                onRowClick={(row) => {navigate(`movies/${row.key}`)}}
             />
         </Space>
     </Col>
